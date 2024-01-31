@@ -247,7 +247,7 @@ then
 
 	pushd "$final_path"
 		# Install bundler, a gems installer
-		ynh_gem install bundler
+		ynh_gem install bundler -v 2.4.22
 		# Install without documentation
 		ynh_exec_as $app echo "gem: --no-ri --no-rdoc" >> "$final_path/.gemrc"
 	popd

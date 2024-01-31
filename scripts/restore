@@ -108,7 +108,7 @@ ynh_script_progression --message="Reinstall Bundle Gem..."
 
 pushd "$final_path"
 	ynh_use_ruby
-	ynh_gem install bundler
+	ynh_gem install bundler -v 2.4.22
 popd
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies

@@ -163,7 +163,7 @@ ynh_add_config --template="../conf/secrets.yml" --destination="$final_path/confi
 pushd "$final_path"
 	ynh_use_ruby
 	# Install bundler, a gems installer
-	ynh_gem install bundler
+	ynh_gem install bundler -v 2.4.22
 	# Install without documentation
 	ynh_exec_as $app echo "gem: --no-ri --no-rdoc" >> "$final_path/.gemrc"
 popd

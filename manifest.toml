@@ -19,7 +19,7 @@ code = "https://github.com/discourse/discourse"
 cpe = "cpe:2.3:a:discourse:discourse"
 
 [integration]
-yunohost = ">=11.2.20"
+yunohost = ">=11.2.30"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -97,7 +97,6 @@ ram.runtime = "1G"
         "vim",
         "redis-server",
         "zlib1g-dev",
-
         "postgresql",
         "postgresql-client",
         "postgresql-contrib",

@@ -53,9 +53,8 @@ ynh_nodejs_install
 #=================================================
 ynh_script_progression "Configuring $app's PostgreSQL database..."
 
-# Set extensions
-ynh_psql_db_shell  <<< "CREATE EXTENSION IF NOT EXISTS hstore;"
-ynh_psql_db_shell  <<< "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS hstore;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -87,8 +86,6 @@ mkdir -p "$install_dir/public/forum"
 ln -s "$install_dir/public/uploads" "$install_dir/public/forum/uploads"
 ln -s "$install_dir/public/backups" "$install_dir/public/forum/backups"
 
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
@@ -136,7 +133,6 @@ if dpkg --print-architecture | grep -q "arm"; then
 fi
 
 pushd "$install_dir"
-
     npm install --location=global terser
     npm install --location=global uglify-js
     ynh_hide_warnings ynh_exec_as_app node_load_PATH" yarn install --production --frozen-lockfile
@@ -207,7 +203,6 @@ ynh_config_add_logrotate "$install_dir/log/production.log"
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-# Start a systemd service
 ynh_systemctl --service="$app" --action="start" --log_path="$install_dir/log/unicorn.stderr.log" --wait_until="INFO -- : worker=$((unicorn_workers-1)) ready"
 
 #=================================================

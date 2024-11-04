@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -54,10 +50,10 @@ fi
 #=================================================
 # UPGRADING DEPENDENCIES
 #=================================================
-ynh_script_progression "Upgrading Ruby..."
+ynh_script_progression "Upgrading dependencies..."
+
 ynh_ruby_install
 
-ynh_script_progression "Upgrading NodeJS..."
 ynh_nodejs_install
 
 #=================================================
@@ -162,7 +158,6 @@ if dpkg --print-architecture | grep -q "arm"; then
 fi
 
 pushd "$install_dir"
-
     npm install --location=global terser
     npm install --location=global uglify-js
     ynh_hide_warnings ynh_exec_as_app node_load_PATH" yarn install --production --frozen-lockfile
